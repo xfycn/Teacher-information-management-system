@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Teacher information management</title>
+	<script src="jquery-3.1.0.min.js"></script>
+	<script src="tea.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div id="Title">
+		<div id="blank"></div><!-- 设置空格  调整文字位置的 -->
+		<h1 style="text-align:center" id="h">教师信息管理系统</h1>
+	</div>
+	<div id="functionbtn">
+		<input type="text" placeholder="请输入教师姓名" id="tin"><button id="1" class="btn btn-warning">教师信息</button>
+		<button style="margin-left:150px" id="2" class="btn btn-primary">教师推荐</button>
+		<button style="margin-left:150px" id="3" class="btn btn-success">教师预约</button>
+		<tx style="margin-left:257px">教师检索</tx>
+		<input type="text" name="searchText" id="st">
+		<button id="ts" class="btn btn-link">检索</button><!-- 上面的是主菜单上的按钮，下面是次级菜单上的按钮  以儿子的形式表示父亲按钮 -->
+	</div>
+		<div id="1son" style="display:none">
+			<button id="1-1" class="btn btn-warning">基本信息</button>
+			<button id="1-2" class="btn btn-warning">教师成果</button>
+			<button id="1-3" class="btn btn-warning">教师日程</button>
+		</div>
+		<div id="2son" style="display:none">
+			<t style="margin-left:415px">专业</t><input type="text" id="major">
+			<t>感兴趣的方向</t><input type="text" id="interest">
+			<button id="suggest" class="btn btn-primary">推荐</button>
+		</div>
+		<div id="3son" style="display:none">
+			<t style="margin-left:675px">预约教师姓名</t><input type="text" id="tn">
+			<button id="contact" class="btn btn-success">预约</button>
+		</div>
+			<div>
+				<p id="name" class="1ss1" style="display:none"></p>
+				<p id="age" class="1ss1" style="display:none"></p>
+				<p id="sex" class="1ss1" style="display:none"></p>
+				<p id="email" class="1ss1" style="display:none"></p>
+				<!-- <p id="achievement" style="display:none">成就</p> -->
+			</div>
+			<div>
+				<h1 id="ach" class="1ss2" style="display:none"></h1>
+			</div>
+			<div>
+				<h2 id="rutine" style="display:none"></h2>
+			</div>
+</body>
+</html>
