@@ -1,0 +1,32 @@
+<?php
+if( $_POST )
+{
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "qazqaz";
+    $dbname = "teacherdb";
+
+    //$tidd = $_COOKIE["TidCookie"];
+    $con=mysqli_connect($servername,$username,$password,$dbname);
+    // 检测连接
+    if (mysqli_connect_errno())
+    {
+        echo "连接失败: " . mysqli_connect_error();
+    }
+
+
+     $tda = $_POST['select11'].$_POST['select12'].$_POST['select13'].$_POST['select14'].$_POST['select15'];
+     $tda = $tda.$_POST['select21'].$_POST['select22'].$_POST['select23'].$_POST['select24'].$_POST['select25'];
+     $tda = $tda.$_POST['select31'].$_POST['select32'].$_POST['select33'].$_POST['select34'].$_POST['select35'];
+     $tda = $tda.$_POST['select41'].$_POST['select42'].$_POST['select43'].$_POST['select44'].$_POST['select45'];
+     $tda = $tda.$_POST['select51'].$_POST['select52'].$_POST['select53'].$_POST['select54'].$_POST['select55'];
+
+     mysqli_query($con,"UPDATE teachers SET tdata=$tda WHERE tid=$tid");
+
+     //echo $tda;
+    mysqli_close($con);
+
+
+}
+?>
