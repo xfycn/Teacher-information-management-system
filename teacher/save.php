@@ -49,7 +49,7 @@ mysqli_close($con);
     <h1>Hello, world!</h1>
 	<img src="http://zui.sexy/docs/img/img1.jpg" width="100%" height="200px"  alt="响应式图片测试">
     <h2 align="right" > 欢迎你，<?php echo $tname; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h2>
-	<div  id="afbox7">
+	<div  id="afbox6">
    <h3 align="center" > 介绍</h3>
    <form name="form1" enctype="multipart/form-data" method="post" action="save1.php">
 	<ul id="accordion" class="accordion">
@@ -86,20 +86,6 @@ mysqli_close($con);
    </div>
 
    </form>
-  <div  id="afbox8">
-  <img <? php echo " src= \"image/1.jpg/\" "?> width="100%" height="100%"  alt="响">
-  
-    
-  </div>
-
-  <div  id="afbox9">
-    <form action="update.php" method="post"enctype="multipart/form-data">
-        <input type="file" name="file" id="file" class="btn " />
-        <br>
-        <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
-    </form>
-
-  </div>
 
     
     <script src="js/t.jquery.js"></script>

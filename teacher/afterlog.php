@@ -356,7 +356,7 @@ mysqli_close($con);
 
    </div>
    <div id="afbox2">
-		<img src="image/1.jpg" width="100%" height="100%"  alt="响">
+		<img src="image/2.jpg" width="100%" height="100%"  alt="响">
 		
 
    </div>
