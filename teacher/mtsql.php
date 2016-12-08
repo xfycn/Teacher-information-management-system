@@ -18,22 +18,27 @@ if ($conn->connect_error) {
 }
 echo "连接成功";
 
- $tname = $_POST["tname"];
- $tpassword = $_POST["tpassword"];
- $temail = $_POST["temail"];
- $tintroduction = $_POST["tintroduction"];
- $tdata = "0000000000000000000000000";
+$tname = $_POST["tname"];
+$tpassword = $_POST["tpassword"];
+$tsex = $_POST["tsex"];
+$tmajor = $_POST["tmajor"];
+$tinterest = $_POST["tinterest"];
+$toffice = $_POST["toffice"];
+$tphone = $_POST["tphone"];
+$temail = $_POST["temail"];
+$tachieve = $_POST["tachieve"];
+$tbasicinf = $_POST["tbasicinf"];
+$tdata = "0000000000000000000000000";
+$tsv = "0000 5 0001 6 ";
  //储存教师预定的情况，25位，一周五天，一天五节课
  //“0”无预约 “1”有预约 “2”请求预约 “3”不接受预约
 
-echo '</br>';
 
-echo $tintroduction;
 
 $sql = "INSERT INTO teachers ".
-    "(tname,tpassword,temail,tintroduction,tdata) ".
+    "(tname,tpassword,tsex,tmajor,tinterest,toffice,tphone,temail,tachieve,tbasicinf,tdata,tsv) ".
     "VALUES ".
-    "('$tname','$tpassword','$temail','$tintroduction','$tdata')";
+    "('$tname','$tpassword','$tsex','$tmajor','$tinterest','$toffice','$tphone','$temail','$tachieve','$tbasicinf','$tdata','$tsv')";
 
 
 

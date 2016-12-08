@@ -6,9 +6,6 @@ $servername = "localhost";
 $username = "root";
 $password = "qazqaz";
 $dbname = "teacherdb";
-$image_name = "1.jpg";
-
-echo  " <img  src= \"image/1.jpg/\"  alt=\"响\"> ";
 
 
 $tidd = $_COOKIE["TidCookie"];
@@ -23,10 +20,17 @@ $result = mysqli_query($con,"SELECT * FROM teachers WHERE tid=$tidd ");
 
 while($row = mysqli_fetch_array($result))
 {
-    $tid = $row['tid'];
-    $tname = $row['tname'];
+    $tname = $row["tname"];
+    $tpassword = $row["tpassword"];
+    $tsex = $row["tsex"];
+    $tmajor = $row["tmajor"];
+    $tinterest = $row["tinterest"];
+    $toffice = $row["toffice"];
+    $tphone = $row["tphone"];
+    $temail = $row["temail"];
+    $tachieve = $row["tachieve"];
+    $tbasicinf = $row["tbasicinf"];
     $tdata = $row['tdata'];
-    $tintroduction= $row['tintroduction'];
 
 }
 
@@ -55,21 +59,36 @@ mysqli_close($con);
 	<ul id="accordion" class="accordion">
 		<li>
 			<div class="link">基本信息</div>
-			<div class="submenu" align="center" >
-				<textarea class="form-control" rows="3" name="tintroduction" ><?php echo $tintroduction; ?>吴立刚，男，汉族，1977年7月出生，博士，哈尔滨工业大学航天学院二级教授、博士生导师。从事复杂不确定动态系统的控制与信号处理研究。目前发表论文160余篇，SCI收录120余篇，SCI他引4000余次；共有27篇论文入选为ESI高被引论" </textarea>
+			<div class="submenu" align="center">
+      <textarea class="form-control" rows="3" name="tbasicinf" ><?php echo $tbasicinf; ?> </textarea>
 			</div>
 		</li>
 		<li>
-			<div class="link">教育经历</div>
-			<p class="submenu" >爱实打实的地区</p>
+			<div class="link">教育方向</div>
+      <div class="submenu" align="center" >
+      姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input type="text"  style="width:120px;" name="tname" value=<?php echo $tname; ?>>
+      <br>
+      性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：<input type="text"  style="width:120px;" name="tsex" value=<?php echo $tsex; ?>>
+      <br>
+      电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input type="text"  style="width:120px;" name="tphone" value=<?php echo $tphone; ?>>
+      <br>
+      邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：<input type="text"  style="width:120px;" name="temail" value=<?php echo $temail; ?>>
+      <br>
+      办公地点：<input type="text" style="width:120px;" name="toffice" value=<?php echo $toffice; ?>>
+      <br>
+      目前就职：<input type="text" style="width:120px;" name="tmajor" value=<?php echo $tmajor; ?>>
+      <br>
+      所在学科：<input type="text" style="width:120px;" name="tinterest" value=<?php echo $tinterest; ?>>
+      <br>
+      </div>
 		</li>
 		<li>
 			<div class="link">工作经历</div>
-			<p class="submenu" >爱实打实的地区</p>
+      <div class="submenu"  >
+			<textarea class="form-control" rows="3" name="tachieve" ><?php echo $tachieve; ?> </textarea>
+      </div>
 		</li>
-		<li><div class="link">荣誉奖励</div>
-			<p class="submenu" >爱实打实的地区</p>
-		</li>
+		
 	</ul>
 
 	<div align="center">

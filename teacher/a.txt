@@ -30,3 +30,9 @@ if( $_POST )
 
 }
 ?>
+
+$sql = "INSERT INTO teachers ".
+    "(tname,tpassword,tsex,tmajor,tinterest,toffice,tphone,temail,tachieve,tbasicinf,tdata,tsv) ".
+    "VALUES ".
+    "('$tname','$tpassword','$tsex','$tmajor','$tinterest','$toffice','$tphone','$temail','$tachieve','$tbasicinf','$tdata','$tsv')";
+    $tsv = "0000 5\n0001 6"

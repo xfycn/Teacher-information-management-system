@@ -1,8 +1,16 @@
-
 <?php
-$str="1 2 3 4 5 6 ";
-$var=explode(" ",$str);
+
+	echo "似的发的期待期待无期";
+	echo "<br>";
+	echo $_POST["tsex"];
+	$a = "asq";
+
+  <?php
+$str="1|2|3|4|5|";
+$var=explode("|",$str);
 print_r($var);
+?>
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +34,7 @@ print_r($var);
 <label for="female">Female</label>
 <input type="radio" name="tsex" id="female"  value="1" />
 </p>
+<input type="text" name="tname" value=<?php echo $a ; ?>>
 
 
 <p align=center>

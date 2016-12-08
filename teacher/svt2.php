@@ -16,8 +16,10 @@ $username = "root";
 $password = "qazqaz";
 $dbname = "teacherdb";
 
-$tidd = 1;
+$tidd = $_COOKIE["tidCookie"];
+$sidd = $_COOKIE["sidCookie"];
 //$tidd = $_COOKIE["TidCookie"];
+
 $con=mysqli_connect($servername,$username,$password,$dbname);
 // 检测连接
 if (mysqli_connect_errno())
@@ -25,30 +27,28 @@ if (mysqli_connect_errno())
     echo "连接失败: " . mysqli_connect_error();
 }
 
+$result = mysqli_query($con,"SELECT * FROM students WHERE id=$sidd ");
+
+while($row = mysqli_fetch_array($result))
+{
+    $sid = $row['id'];
+    $sname = $row["name"];
+    
+}
+
 $result = mysqli_query($con,"SELECT * FROM teachers WHERE tid=$tidd ");
 
 while($row = mysqli_fetch_array($result))
 {
     $tid = $row['tid'];
-    $tacnum = $row["tacnum"];
-    $tname = $row["tname"];
-    $tpassword = $row["tpassword"];
-    $tsex = $row["tsex"];
-    $tmajor = $row["tmajor"];
-    $toffice = $row["toffice"];
-    $tphone = $row["tphone"];
-    $temail = $row["temail"];
-    $tachieve = $row["tachieve"];
     $tdata = $row['tdata'];
+    $tsv = $row['tsv'];
 
 }
 
 for ($i=0; $i<25; $i++)
 {
     $ttv[$i] = substr($tdata, $i, 1);
-
-    //echo $ttv[$i];
-    //echo "<br>";
 }
 
 if( $_POST )
@@ -59,19 +59,27 @@ if( $_POST )
     $tdata = $tdata.get_data('select41',$ttv[15]).get_data('select42',$ttv[12]).get_data('select43',$ttv[17]).get_data('select44',$ttv[18]).get_data('select45',$ttv[19]);
     $tdata = $tdata.get_data('select51',$ttv[20]).get_data('select52',$ttv[13]).get_data('select53',$ttv[22]).get_data('select54',$ttv[23]).get_data('select55',$ttv[24]);
 
-    mysqli_query($con,"UPDATE teachers SET tdata=$tdata WHERE tid=$tid");
+    for ($i=0; $i<25; $i++)
+    {
+      if( $ttv[$i] != substr($tdata, $i, 1) ){
+        $tsv = $tsv.$sid." ".$i." ";
+      }
+      
+    }
 
-    echo $tdata;
+    mysqli_query($con,"UPDATE teachers SET tsv='$tsv' WHERE tid='$tid'");
+    mysqli_query($con,"UPDATE teachers SET tdata='$tdata' WHERE tid='$tid'");
 
+
+
+
+    echo '<script>window.close();</script>'; 
 
 }
 
 for ($i=0; $i<25; $i++)
 {
     $ttv[$i] = substr($tdata, $i, 1);
-
-    //echo $ttv[$i];
-    //echo "<br>";
 }
 
 
@@ -89,42 +97,16 @@ mysqli_close($con);
     <link href="dist/css/zui.min.css" rel="stylesheet">
     <link href="teacher.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" media="screen" type="text/css" />
+    <script>
+      function aler() {
+        alert("预约成功");
+      }</script>
+          
   </head>
   <body>
-    <h1>Hello, world!</h1>
-	<img src="http://zui.sexy/docs/img/img1.jpg" width="100%" height="200px"  alt="响应式图片测试">
-    <h2 align="right" > 欢迎你，<?php echo $tname; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h2>
-	<div  id="afbox5">
-   <h3 align="center" > 介绍</h3>
-
-	<ul id="accordion" class="accordion">
-		<li>
-			<div class="link">基本信息</div>
-			<div class="" align="center" >
-			<p ><?php echo $tname; ?></p>
-      <p ><?php echo $tsex; ?></p>
-      <p ><?php echo $tphone; ?></p>
-      <p ><?php echo $temail; ?></p>
-			</div>
-		</li>
-		<li>
-			<div class="link">教育方向</div>
-      <div class="submenu" align="center" >
-			<p ><?php echo $tmajor; ?></p>
-      <p ><?php echo $toffice; ?></p>
-      </div>
-		</li>
-		<li>
-			<div class="link">工作经历</div>
-      <div class="submenu" align="center" >
-			<p ><?php echo $tachieve; ?></p>
-      </div>
-		</li>
-		
-	</ul>
-
-<br><br><br><br>
-
+	<img src="image/4.jpg" width="100%" height="200px"  alt="响应式图片测试">
+	
+   
 <form name="form1" enctype="multipart/form-data" method="post" action="">
 
    <table class="table table-bordered " >
@@ -143,42 +125,42 @@ mysqli_close($con);
       <td>一二节</td>
       <td>
       <select class="form-control" name="select11" <?php  if ( $ttv[0]!=0 ){echo "disabled";}  ?>  >
-  <option <?php if($ttv[0]==0) echo("selected");?> value="0" >无预约</option>
-  <option <?php if($ttv[0]==1) echo("selected");?> value="1" >有预约</option>
-  <option <?php if($ttv[0]==2) echo("selected");?> value="2" disabled >请求预约</option>
-  <option <?php if($ttv[0]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[0]==0) echo("selected");?> value="0">无预约</option>
+  <option <?php if($ttv[0]==1) echo("selected");?> value="1" disabled >有预约</option>
+  <option <?php if($ttv[0]==2) echo("selected");?> value="2">请求预约</option>
+  <option <?php if($ttv[0]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
       <td>
       <select class="form-control" name="select12" <?php  if ( $ttv[1]!=0 ){echo "disabled";}  ?>  >
   <option <?php if($ttv[1]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[1]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[1]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[1]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[1]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[1]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select13" <?php  if ( $ttv[2]!=0 ){echo "disabled";}  ?>  >
   <option <?php if($ttv[2]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[2]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[2]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[2]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[2]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[2]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select14" <?php  if ( $ttv[3]!=0 ){echo "disabled";}  ?>  >
   <option <?php if($ttv[3]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[3]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[3]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[3]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[3]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[3]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select15" <?php  if ( $ttv[4]!=0 ){echo "disabled";}  ?>  >
   <option <?php if($ttv[4]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[4]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[4]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[4]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[4]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[4]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
     </tr>
@@ -187,41 +169,41 @@ mysqli_close($con);
       <td>
       <select class="form-control" name="select21" <?php  if ( $ttv[5]!=0 ){echo "disabled";}  ?>  >
   <option <?php if($ttv[5]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[5]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[5]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[5]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[5]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[5]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
       <td>
       <select class="form-control" name="select22" <?php  if ( $ttv[6]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[6]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[6]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[6]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[6]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[6]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[6]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select23" <?php  if ( $ttv[7]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[7]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[7]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[7]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[7]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[7]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[7]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select24" <?php  if ( $ttv[8]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[8]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[8]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[8]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[8]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[8]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[8]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select25" <?php  if ( $ttv[9]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[9]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[9]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[9]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[9]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[9]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[9]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
     </tr>
@@ -230,41 +212,41 @@ mysqli_close($con);
       <td>
       <select class="form-control" name="select31" <?php  if ( $ttv[10]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[10]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[10]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[10]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[10]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[10]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[10]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
       <td>
       <select class="form-control" name="select32" <?php  if ( $ttv[11]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[11]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[11]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[11]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[11]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[11]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[11]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select33" <?php  if ( $ttv[12]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[12]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[12]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[12]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[12]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[12]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[12]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select34" <?php  if ( $ttv[13]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[13]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[13]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[13]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[13]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[13]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[13]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select35" <?php  if ( $ttv[14]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[14]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[14]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[14]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[14]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[14]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[14]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
     </tr>
@@ -273,41 +255,41 @@ mysqli_close($con);
       <td>
       <select class="form-control" name="select41" <?php  if ( $ttv[15]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[15]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[15]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[15]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[15]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[15]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[15]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
       <td>
       <select class="form-control" name="select42" <?php  if ( $ttv[16]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[16]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[16]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[16]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[16]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[16]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[16]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select43" <?php  if ( $ttv[17]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[17]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[17]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[17]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[17]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[17]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[17]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select44" <?php  if ( $ttv[18]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[18]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[18]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[18]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[18]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[18]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[18]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select45" <?php  if ( $ttv[19]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[19]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[19]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[19]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[19]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[19]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[19]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
     </tr>
@@ -316,41 +298,41 @@ mysqli_close($con);
       <td>
       <select class="form-control" name="select51" <?php  if ( $ttv[20]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[20]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[20]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[20]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[20]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[20]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[20]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
       <td>
       <select class="form-control" name="select52" <?php  if ( $ttv[21]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[21]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[21]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[21]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[21]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[21]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[21]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select53" <?php  if ( $ttv[22]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[22]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[22]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[22]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[22]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[22]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[22]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
-</td>
+</td> 
 <td>
       <select class="form-control" name="select54" <?php  if ( $ttv[23]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[23]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[23]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[23]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[23]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[23]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[23]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 <td>
       <select class="form-control" name="select55" <?php  if ( $ttv[24]!=0 ){echo "disabled";}  ?>>
   <option <?php if($ttv[24]==0) echo("selected");?> value="0">无预约</option>
-  <option <?php if($ttv[24]==1) echo("selected");?> value="1">有预约</option>
+  <option <?php if($ttv[24]==1) echo("selected");?> value="1" disabled >有预约</option>
   <option <?php if($ttv[24]==2) echo("selected");?> value="2">请求预约</option>
-  <option <?php if($ttv[24]==3) echo("selected");?> value="3">不接受预约</option>
+  <option <?php if($ttv[24]==3) echo("selected");?> value="3" disabled >不接受预约</option>
 </select>
 </td>
 
@@ -361,15 +343,13 @@ mysqli_close($con);
 <br>
 
 <div align="center">
-   <input class="btn btn-primary" type="submit" name="Submit" value="提交">
+   <input class="btn btn-primary" type="submit" name="Submit" onclick="aler()" value="提交">
+
    &nbsp;&nbsp;&nbsp;
    <button class="btn" type="reset" >重置</button>
    </div>
    <br><br>
    </form>
-
-	</div>
-
 
 
 

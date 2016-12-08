@@ -19,6 +19,8 @@ echo "连接成功";
 $tname = $_POST["tname"];
 $tpassword = $_POST["tpassword"];
 echo "连接成功";
+echo $tname;
+echo $tpassword;
 
 $sql = "SELECT tname, tpassword, tid FROM teachers";
 $result = $conn->query($sql);

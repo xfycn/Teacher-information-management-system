@@ -20,12 +20,35 @@
 
     while($row = mysqli_fetch_array($result))
     {
-        $tid = $row['tid'];
-        $tname = $row['tname'];
+        $tname = $row["tname"];
+        $tpassword = $row["tpassword"];
+        $tsex = $row["tsex"];
+        $tmajor = $row["tmajor"];
+        $tinterest = $row["tinterest"];
+        $toffice = $row["toffice"];
+        $tphone = $row["tphone"];
+        $temail = $row["temail"];
+        $tachieve = $row["tachieve"];
+        $tbasicinf = $row["tbasicinf"];
         $tdata = $row['tdata'];
-        $tintroduction= $row['tintroduction'];
+        $tsv = $row['tsv'];
+        
     }
 
+    $data1=array("一","二","三","四","五");
+    $data2=array("一二","三四","五六","七八","九十");
+    $arr=explode(" ",$tsv);
+    for ($i=0; $i<count($arr); $i++,$i++)
+    {
+        $result = mysqli_query($con,"SELECT * FROM students WHERE id='$arr[$i]' ");
+
+        while($row = mysqli_fetch_array($result))
+        {
+            $namearr[$i/2] = $row["name"]."在周".$data1[($i+1)/5].$data2[($i+1)%5]."节请求预约";
+            
+        }
+    }
+    
     for ($i=0; $i<25; $i++)
     {
         $ttv[$i] = substr($tdata, $i, 1);
@@ -44,8 +67,8 @@
         $tdata = $tdata.$_POST['select41'].$_POST['select42'].$_POST['select43'].$_POST['select44'].$_POST['select45'];
         $tdata = $tdata.$_POST['select51'].$_POST['select52'].$_POST['select53'].$_POST['select54'].$_POST['select55'];
 
-        echo $tdata;
-        mysqli_query($con,"UPDATE teachers SET tdata='$tdata' WHERE tid='$tid'");
+        
+        mysqli_query($con,"UPDATE teachers SET tdata='$tdata' WHERE tid='$tidd'");
 
 
     }
@@ -77,7 +100,7 @@ mysqli_close($con);
     <link href="css/style.css" rel="stylesheet" media="screen" type="text/css" />
   </head>
   <body>
-    <img src="http://zui.sexy/docs/img/img1.jpg" width="100%" height="200px"  alt="响应式图片测试">
+    <img src="image/4.jpg" width="100%" height="200px"  alt="响应式图片测试">
     <h2 align="right" > 欢迎你，<?php echo $tname; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h2>
    <div class="container-fixed-sm" id="afbox3">
 
@@ -117,7 +140,7 @@ mysqli_close($con);
       <select class="form-control" name="select13" >
   <option <?php if($ttv[2]==0) echo("selected");?> value="0">无预约</option>
   <option <?php if($ttv[2]==1) echo("selected");?> value="1">有预约</option>
-  <option <?php if($ttv[2]==2) echo("selected");?> value="2" disabled 请求预约</option>
+  <option <?php if($ttv[2]==2) echo("selected");?> value="2" disabled >请求预约</option>
   <option <?php if($ttv[2]==3) echo("selected");?> value="3">不接受预约</option>
 </select>
 </td>
@@ -331,20 +354,29 @@ mysqli_close($con);
 	<ul id="accordion" class="accordion">
 		<li>
 			<div class="link">基本信息</div>
-			<div class="submenu" align="center" >
-			<p ><?php echo $tintroduction; ?>吴立刚，男，汉族，1977年7月出生，博士，哈尔滨工业大学航天学院二级教授、博士生导师。从事复杂不确定动态系统的控制与信号处理研究。目前发表论文160余篇，SCI收录120余篇，SCI他引4000余次；共有27篇论文入选为ESI高被引论文，5篇论文入选为ESI热点论文，4篇第一作者论文获自动控制领域权威期刊Automatica Most Cited Article (2009-2012)，4篇论文入选中国百篇最具影响国际学术论文；在Springer和Wiley出版英文专著6部。主持国家自然科学基金、霍英东青年基金等十余项科研项目。国家杰出青年科学基金获得者，首批国家优秀青年科学基金获得者，黑龙江省杰出青年科学基金获得者；入选中组部青年拔尖人才支持计划、教育部新世纪优秀人才支持计划；获中国青年五四奖章、全国优秀博士学位论文提名奖等奖励和荣誉。作为第一完成人获黑龙江省自然科学一等奖；作为第二完成人获国家自然科学二等奖。目前担任IEEE Transactions on Automatic Control、IEEE/ASME Transactions on Mechatronics、《自动化学报》等十余个期刊编委以及担任IEEE CSS Conference Editorial Board编委。IEEE高级会员、中国自动化学会控制理论专业委员会委员。当选2015、2016年全球高被引科学家(Thomson Reuters Highly Cited Researcher)。</p>
+			<div class="submenu"  align="center" >
+      <br>
+      <p ><?php echo $tbasicinf; ?></p>
 			</div>
 		</li>
 		<li>
-			<div class="link">教育经历</div>
-			<p class="submenu" >爱实打实的地区</p>
+			<div class="link">个人信息</div>
+			<div class="submenu" align="justify" >
+      <br>
+      <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓&nbsp;&nbsp;名：<?php echo $tname; ?></p>
+      <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性&nbsp;&nbsp;别：<?php echo $tsex; ?></p>
+      <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;话：<?php echo $tphone; ?></p>
+      <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮&nbsp;&nbsp;箱：<?php echo $temail; ?></p>
+      <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;办公地点：<?php echo $toffice; ?></p>
+      <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前就职：<?php echo $tmajor; ?></p>
+      <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所在学科：<?php echo $tinterest; ?></p>
+      </div>
 		</li>
 		<li>
-			<div class="link">工作经历</div>
-			<p class="submenu" >爱实打实的地区</p>
-		</li>
-		<li><div class="link">荣誉奖励</div>
-			<p class="submenu" >爱实打实的地区</p>
+			<div class="link">成就经历</div>
+      <div class="submenu" align="center" >
+      <br>
+			<p ><?php echo $tachieve; ?></p></div>
 		</li>
 	</ul>
 
@@ -357,8 +389,15 @@ mysqli_close($con);
    </div>
    <div id="afbox2">
 		<img src="image/2.jpg" width="100%" height="100%"  alt="响">
-		
-
+   </div>
+   
+   <div  id="afbox42">
+     <h2> 预约情况 </h2>
+     <?php 
+      for ($i=0; $i<count($namearr); $i++){ 
+        echo $namearr[$i]."<br>"; 
+        } 
+      ?>
    </div>
    
    
