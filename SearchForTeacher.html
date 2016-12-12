@@ -3,17 +3,37 @@
 <head>
   <meta charset="utf-8">
   <title>Search For Book</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<div style="padding:30px; text-align:center">
 	<h1>教师信息管理系统</h1>
-	</div>
-	<div style="padding:75px; text-align:right">
-	<form action="SearchResult.php" method="post">
-	    <p>教师查询: <input type="text" placeholder="请输入教师姓名" name="Name" /></p>
+	</div>	
+
+	<div style="padding:75px; text-align:left">
+	<table border="0" align="right" width="600">
+        <tr>
+           <td>
+           <table  border="0" align="right" width="500">
+	<form action="RecommendResult.php" method="post">
+		<h2>教师推荐</h2>
+	    <p>专业: <input type="text" name="Major" /></p>
+	    <p>方向: <input type="text" name="Interest" /></p>
 	    <p><input type="submit" value="查询"></p>
 	</form>
+	 </table>
+           </td>
+           <td>
+           <table border="0" align="right" width="100">
+          
+	<form action="SearchResult.php" method="post">
+		<h2>教师查询</h2>
+	    <p>姓名<input type="text" name="Name" /></p>
+	    <p><input type="submit" value="查询"></p>
+	</form>
+	</table>
+           </td>
+        </tr>
+        </table>
 	</div>
 </body>
 </html>

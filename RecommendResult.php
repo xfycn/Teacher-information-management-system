@@ -14,6 +14,7 @@
 </div>
 
 
+
 <?php
 $con = mysql_connect("localhost","root","123456");
 if (!$con)
@@ -26,8 +27,9 @@ else
     //open the database
   mysql_select_db("teacherdb", $con);
   mysql_query("set names 'utf8'"  );
-  $name = $_POST['Name'];
-  $result = mysql_query("SELECT * FROM teachers WHERE tname = '".$name."'");
+  $major = $_POST['Major'];
+  $interest = $_POST['Interest'];
+  $result = mysql_query("SELECT * FROM teachers WHERE tmajor = '".$major."' and tinterest = '".$interest."'");
   $inf = array();
   $i = 0;
 

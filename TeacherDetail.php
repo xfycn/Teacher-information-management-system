@@ -52,7 +52,6 @@ mysql_close($con);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Make Appiontment</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/zui.min.css" rel="stylesheet">
   <script>
 function open_win() {
