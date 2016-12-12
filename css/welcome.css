@@ -1,0 +1,43 @@
+body
+{
+	background-image: url("http://xfycn.com.cn/pic/student_home_bcg.jpg");
+}
+.wel
+{
+	text-align: center;
+}
+body
+{
+	/*background-color: #6C6C6C;*/
+}
+.wel-title
+{
+	text-align: center;
+	font-size: 20px;
+	background-color: #5B5B5B;
+	color: white;
+}
+strong
+{
+	font-size: 50px;
+	font-style: "微软雅黑";
+}
+.wel-teacher-link
+{
+	margin-top:300px; 
+	font-size: 25px;
+	
+}
+.wel-student-link
+{
+	text-indent: 50px;
+	margin-top: 70px;
+	font-size: 25px;
+
+}
+a
+{
+	color: white;
+	background-color: #ADADAD;
+}
+

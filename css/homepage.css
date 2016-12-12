@@ -1,0 +1,51 @@
+body
+{
+	background-image: url("http://xfycn.com.cn/pic/student_home_bcg.jpg");
+}
+h2
+{
+	font-size: 25px;
+	color: white;
+	background-color: #FF9224;
+	height: 200px;
+
+}
+strong
+{
+	font-size: 50px;
+}
+p
+{
+	font-size: 15px;
+	font-weight: 700;
+}
+img
+{
+	width: 150px;
+	height: 150px;
+	left: 0%;
+	top: 0%;
+	margin-top: -150px;
+}
+
+.Student_homepage_student_information_form
+{
+	width: 300px;
+	height: 400px;
+	position: relative;
+	left: 0%;
+	top: 0%;
+	/*background-color: red;*/
+}
+.Student_homepage_teacher_search_form
+{
+	position: relative;
+	float: right;
+	margin-top: -630px;
+}
+.suggest_form
+{
+	position: relative;
+	float: right;
+	margin-top: -600px;
+}

@@ -1,0 +1,45 @@
+.Teacher-login
+{
+	text-align: center;
+	margin-top: 17%;
+	font-weight: bold;
+}
+.Teacher-id
+{
+	width: 230px;
+}
+.Teacher-password
+{
+	margin-top: 5%;
+	width: 230px;
+}
+.Teacher-login-submit
+{
+	margin-top: 5%;
+	width: 100px;
+}
+.Student-login
+{
+	text-align: center;
+	margin-top: 17%;
+	font-weight: bold;
+}
+.Student-id
+{
+	width: 230px;
+}
+.Student-password
+{
+	margin-top: 5%;
+	width: 230px;
+}
+.Student-login-submit
+{
+	margin-top: 5%;
+	width: 100px;
+}
+body
+{
+	background-image: url("http://xfycn.com.cn/pic/background.jpeg");
+	background-size: cover;
+}
