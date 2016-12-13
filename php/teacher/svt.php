@@ -18,7 +18,7 @@ $dbname = "teacher";
 $dbname1 = "student";
 $tidd = $_COOKIE["tidCookie"];
 $sidd = $_COOKIE["sidCookie"];
-echo $tidd.$sidd."asdadqwdqwdqwdq";
+//echo $tidd.$sidd."asdadqwdqwdqwdq";
 //$tidd = $_COOKIE["TidCookie"];
 
 $con=mysqli_connect($servername,$username,$password,$dbname);

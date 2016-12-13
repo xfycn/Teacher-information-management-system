@@ -54,11 +54,11 @@ else
         <!--奇数的人-->
            <td>
            <table  border="0" align="left" width="450">
-           <img src="<?php echo $inf[$j][0].".png";?>" width=150px length=150px/>
+           <img src="<?php echo "http://xfycn.com.cn/pic/".$inf[$j][0].".png";?>" width=150px length=150px/>
            <span><?php echo '<br><br>姓名：<a href="TeacherDetail.php?tid=',$inf[$j][0],'&sid=',$id,'">',$inf[$j][1],'</a>' ?></span>
            <span>
            <?php 
-           if($inf[$j][2] = 0){
+           if($inf[$j][2] == 0){
             echo '<br><br>性别：男';
            }
            else{
@@ -74,11 +74,11 @@ else
            <td>
            <table border="0" align="center" width="450">
           
-           <img src="<?php echo $inf[$j + 1][0].".png";?>" width=150px length=150px />
+           <img src="<?php echo "http://xfycn.com.cn/pic/".$inf[$j + 1][0].".png";?>" width=150px length=150px />
            <span><?php echo '<br><br>姓名：<a href="TeacherDetail.php?tid=',$inf[$j + 1][0],'">',$inf[$j + 1][1],'</a>' ?></span>
            <span>
            <?php 
-           if($inf[$j + 1][2] = 0){
+           if($inf[$j + 1][2] == 0){
             echo '<br><br>性别：男';
            }
            else{
@@ -99,7 +99,7 @@ else
         echo "<br><br><br>";
         ?>
         <table  border="0" align="left">
-           <img src="<?php echo $inf[$j][0].".png";?>" width=150px length=150px/>
+           <img src="<?php echo "http://xfycn.com.cn/pic/".$inf[$j][0].".png";?>" width=150px length=150px/>
            <span><?php echo '<br><br>姓名：<a href="TeacherDetail.php?tid=',$inf[$j][0],'">',$inf[$j][1],'</a>' ?></span>
            <span>
            <?php 
@@ -124,7 +124,7 @@ else
     echo "<br><br><br>";
     ?>
     <table  border="0" align="left">
-           <img src="<?php echo $inf[$j][0].".png";?>" width=150px length=150px/>
+           <img src="<?php echo "http://xfycn.com.cn/pic/".$inf[$j][0].".png";?>" width=150px length=150px/>
            <span><?php echo '<br><br>姓名：<a href="TeacherDetail.php?tid=',$inf[$j][0],'">',$inf[$j][1],'</a>' ?></span>
            <span>
            <?php 

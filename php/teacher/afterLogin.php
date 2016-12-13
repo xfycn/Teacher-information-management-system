@@ -34,7 +34,7 @@
         
     }
 
-    if ($tsex == 1 ) {
+    if ($tsex == 0 ) {
       $tsex1 = "男";
     }else{
       $tsex1 = "女";
@@ -375,7 +375,7 @@
 </div>
 
 <div id="afbox2">
-	<img src="image/2.jpg" width="100%" height="100%"  alt="响">
+	<img src="<?php echo "http://xfycn.com.cn/pic/".$tidd.".png";?>" width="100%" height="100%"  alt="响">
 </div>
    
 <div  id="afbox42">

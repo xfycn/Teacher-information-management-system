@@ -88,7 +88,7 @@ function open_win() {
   <!--照片+姓名-->
      <td>
      <table>
-     <img src="<?php echo $inf[0].".png";?>" width=200px length=200px align="absbottom"/>
+     <img src="<?php echo "http://xfycn.com.cn/pic/".$inf[0].".png";?>" width=200px length=200px align="absbottom"/>
      <span style="margin-left:20px; vertical-align: bottom"><?php echo"$inf[1]" ?></span>
      </table>
      </td>

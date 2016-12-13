@@ -45,7 +45,7 @@ if (isset($_POST["student_login_submit"]) && $_POST["student_login_submit"]=="�
 					</head>
 					<body>
 						<h2><strong>教师信息管理系统</strong>学生个人主页</h2>
-						<img src="http://localhost/pic/HIT.jpg">
+						<img src="http://xfycn.com.cn/pic/HIT.jpg">
 						<br><br>
 						<form class="Student_homepage_student_information_form">
 							<p><?php echo "学号：".$inf[0];?><br><br><br><br></p>

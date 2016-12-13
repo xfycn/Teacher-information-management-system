@@ -9,7 +9,7 @@ $dbname = "teacher";
 
 
 $tidd = $_COOKIE["TidCookie"];
-$con = new mysqli_connect($servername,$username,$password,$dbname);
+$con = mysqli_connect($servername,$username,$password,$dbname);
 mysqli_query($con, "set names 'utf8'");
 // 检测连接
 if (mysqli_connect_errno())
